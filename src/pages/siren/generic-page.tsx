@@ -1,10 +1,9 @@
+import React from "react"
 import type { NextPage } from "next"
 import Head from "next/head"
-
 import { Box, Button, Flex, FormControl, FormLabel, HStack, Image, Input, Text } from "@chakra-ui/react"
 import { ExternalLinkIcon } from "@chakra-ui/icons"
 
-import React from "react"
 import { ShowApiRechercheResult } from "@/components/ShowApiRechercheResult"
 import { ShowApiEntrepriseResult } from "@/components/ShowApiEntrepriseResult"
 import { SirenExample } from "@/components/SirenExample"
@@ -13,8 +12,14 @@ function isValidSiren(siren: string) {
   return /^\d{9}$/.test(siren)
 }
 
-const Home: NextPage = () => {
+export const GenericPage: NextPage<{ siren?: string }> = ({ siren: initialSiren }) => {
   const [siren, setSiren] = React.useState("")
+
+  React.useEffect(() => {
+    if (initialSiren) {
+      setSiren(initialSiren)
+    }
+  }, [initialSiren])
 
   function handleChange(e) {
     setSiren(e.target.value)
@@ -60,17 +65,27 @@ const Home: NextPage = () => {
             </HStack>
             <HStack>
               <Text>Exemples de Siren :</Text>
-              <SirenExample siren="443007778" setSiren={setSiren}></SirenExample>
-              <SirenExample siren="345311765" setSiren={setSiren}></SirenExample>
-              <SirenExample siren="412653180" setSiren={setSiren}></SirenExample>
-              <SirenExample siren="850699323" setSiren={setSiren}></SirenExample>
-              <SirenExample siren="771200318" setSiren={setSiren}></SirenExample>
-              <SirenExample siren="418180683" setSiren={setSiren}></SirenExample>
+              <SirenExample siren="443007778" />
+              <SirenExample siren="345311765" />
+              <SirenExample siren="412653180" />
+              <SirenExample siren="850699323" />
+              <SirenExample siren="771200318" />
+              <SirenExample siren="418180683" />
             </HStack>
           </Flex>
           <HStack mt="4">
-            <ShowApiEntrepriseResult backgroundColor="lightblue" siren={siren} />
-            <ShowApiRechercheResult backgroundColor="lightgreen" siren={siren} />
+            <ShowApiEntrepriseResult
+              title="API Entreprise"
+              backgroundColor="lightblue"
+              siren={siren}
+              docLink="https://entreprise.api.gouv.fr/catalogue/"
+            />
+            <ShowApiRechercheResult
+              title="API recherche-entreprises (CDTN)"
+              backgroundColor="lightgreen"
+              siren={siren}
+              docLink="https://github.com/SocialGouv/recherche-entreprises"
+            />
           </HStack>
         </Box>
 
@@ -91,5 +106,3 @@ const Home: NextPage = () => {
     </div>
   )
 }
-
-export default Home

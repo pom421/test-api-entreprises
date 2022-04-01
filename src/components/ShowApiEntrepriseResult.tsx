@@ -10,9 +10,13 @@ const URL_API_ENTREPRISE = "/api/proxy-api-entreprise/"
 export function ShowApiEntrepriseResult({
   backgroundColor = "lightblue",
   siren,
+  title,
+  docLink,
 }: {
   backgroundColor: string
   siren: string
+  title: string
+  docLink: string
 }) {
   const { data, error } = useSWR(siren ? URL_API_ENTREPRISE + siren : null, fetcher)
 
@@ -20,5 +24,5 @@ export function ShowApiEntrepriseResult({
   if (error) return <Text>Erreur</Text>
   if (!data) return <Spinner />
 
-  return <ShowResult backgroundColor={backgroundColor} result={data} />
+  return <ShowResult backgroundColor={backgroundColor} result={data} docLink={docLink} title={title} />
 }

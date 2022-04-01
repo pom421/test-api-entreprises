@@ -10,9 +10,13 @@ const RECHERCHE_API_URL = "https://search-recherche-entreprises.fabrique.social.
 export function ShowApiRechercheResult({
   backgroundColor = "lightblue",
   siren,
+  title,
+  docLink,
 }: {
   backgroundColor: string
   siren: string
+  title: string
+  docLink: string
 }) {
   const { data, error } = useSWR(siren ? RECHERCHE_API_URL + siren : null, fetcher)
 
@@ -20,5 +24,5 @@ export function ShowApiRechercheResult({
   if (error) return <Text>Erreur</Text>
   if (!data) return <Spinner />
 
-  return <ShowResult backgroundColor={backgroundColor} result={data} />
+  return <ShowResult backgroundColor={backgroundColor} result={data} docLink={docLink} title={title} />
 }

@@ -7,6 +7,15 @@ const nextConfig = {
     // `.api.ts` for API routes
     "api.ts",
   ],
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/siren/",
+        permanent: true,
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig

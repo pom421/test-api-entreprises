@@ -7,6 +7,7 @@ import { ExternalLinkIcon } from "@chakra-ui/icons"
 import { ShowApiRechercheResult } from "@/components/ShowApiRechercheResult"
 import { ShowApiEntrepriseResult } from "@/components/ShowApiEntrepriseResult"
 import { SirenExample } from "@/components/SirenExample"
+import { ShowApiEgapro } from "@/components/ShowApiEgapro"
 
 function isValidSiren(siren: string) {
   return /^\d{9}$/.test(siren)
@@ -85,6 +86,12 @@ export const GenericPage: NextPage<{ siren?: string }> = ({ siren: initialSiren 
               backgroundColor="lightgreen"
               siren={siren}
               docLink="https://github.com/SocialGouv/recherche-entreprises"
+            />
+            <ShowApiEgapro
+              title="API validate-siren (Egapro)"
+              backgroundColor="lightsalmon"
+              siren={siren}
+              docLink="https://github.com/SocialGouv/egapro-api/blob/master/egapro/views.py"
             />
           </HStack>
         </Box>

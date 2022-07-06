@@ -7,7 +7,7 @@ import theme from "../theme"
 function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider theme={theme}>
-      <Stack spacing={8} px="35" maxW="1200" margin="auto">
+      <Stack spacing={8} px="35" maxW="1600" margin="auto">
         <Heading as="h1">API Entreprises vs Recherche entreprises</Heading>
         <Component {...pageProps} />
       </Stack>
